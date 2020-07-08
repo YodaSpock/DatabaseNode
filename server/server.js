@@ -5,10 +5,10 @@ const app = express();
 
 app.use(express.json());
 
-app.use('/api/users', apiRouter);
+app.use('/users', apiRouter);
 
-app.listen(process.env.PORT || '5000', () => {
+app.listen(process.env.PORT || '3001', () => {
 
-    console.log(`Server is Running on Port: ${process.env.PORT || '5000'}`);
+    console.log(`Server is Running on Port: ${process.env.PORT || '3001'}`);
 
 });

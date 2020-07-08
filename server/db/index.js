@@ -1,7 +1,6 @@
 const mysql = require('mysql');
 
-const pool =  mysql.createPool({
-    connectionLimit: 10,
+const connection =  mysql.createConnection({
     password: 'Chewbacca980',
     user: 'root',
     database: 'database_node',
@@ -10,31 +9,12 @@ const pool =  mysql.createPool({
 
 });
 
-let users = {};
+connection.connect(function(error){
+    if(!error){
+        console.log('Connected To Database')
+    }else{
+        console.log(error);
+    }
+})
 
-users.all = () => {
-
-    return new Promise((resolve, reject) => {
-        pool.query(`SELECT * FROM users`, (err, results) => {
-            if(err){
-                return reject(err);
-            }
-            return resolve(results);
-        })
-    });
-};
-
-users.one = (id) => {
-
-    return new Promise((resolve, reject) => {
-        pool.query(`SELECT * FROM users WHERE id = ?`, [id], (err, results) => {
-            if(err){
-                return reject(err);
-            }
-            return resolve(results);
-        })
-    });
-};
-
-
-module.exports = users;
+module.exports = connection;
